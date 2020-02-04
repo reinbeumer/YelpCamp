@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 app.get('/campgrounds', (req, res) => {
 	Campground.find({}, (err, allCampgrounds) => {
 		if (err) {
-			console.log('An error occured');
+			console.log('An error occurred');
 			console.log(err);
 		} else {
 			res.render('index', { campgrounds: allCampgrounds });
@@ -43,10 +43,10 @@ app.post('/campgrounds', (req, res) => {
 	let name = req.body.name;
 	let image = req.body.image;
 	let description = req.body.description;
-	let newCapground = { name: name, image: image, description: description };
-	Campground.create(newCapground, (err, campground) => {
+	let newCapGround = { name: name, image: image, description: description };
+	Campground.create(newCapGround, (err, campground) => {
 		if (err) {
-			console.log('An error occured');
+			console.log('An error occurred');
 			console.log(err);
 		} else {
 			console.log('Creating campground');
@@ -63,7 +63,7 @@ app.get('/campgrounds/new', (req, res) => {
 app.get('/campgrounds/:id', (req, res) => {
 	Campground.findById(req.params.id, (err, foundCampground) => {
 		if (err) {
-			console.log('An error occured');
+			console.log('An error occurred');
 			console.log(err);
 		} else {
 			res.render('show', { campground: foundCampground });
@@ -72,6 +72,6 @@ app.get('/campgrounds/:id', (req, res) => {
 });
 app.listen(process.env.PORT,() => {
 	console.log(
-		`Yelpcamp server has started`
+		`YelpCamp server has started`
 	);
 });

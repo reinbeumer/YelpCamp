@@ -72,14 +72,19 @@ app.get('/campgrounds/:id', (req, res) => {
 	});
 });
 
-portfinder.getPort((err, port) => {
-	if (err) {
-		reject(err)
-	} else {
-		app.listen(port, () => {
-			console.log(
-				`YelpCamp server has started at ${port}`
-			);
-		});
-	}
+// portfinder.getPort((err, port) => {
+// 	if (err) {
+// 		reject(err)
+// 	} else {
+// 		app.listen(port, () => {
+// 			console.log(
+// 				`YelpCamp server has started at ${port}`
+// 			);
+// 		});
+// 	}
+// });
+app.listen(() => {
+	console.log(
+		`YelpCamp server has started`
+	);
 });

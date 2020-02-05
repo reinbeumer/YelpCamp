@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const favicon = require('serve-favicon');
+const portfinder = require('portfinder');
 
 app.use(express.static('public'));
 app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -46,7 +47,7 @@ app.post('/campgrounds', (req, res) => {
 	let newCapGround = { name: name, image: image, description: description };
 	Campground.create(newCapGround, (err, campground) => {
 		if (err) {
-			console.log('An error occurred');
+			console.log('An error occurred!');
 			console.log(err);
 		} else {
 			console.log('Creating campground');
@@ -63,15 +64,22 @@ app.get('/campgrounds/new', (req, res) => {
 app.get('/campgrounds/:id', (req, res) => {
 	Campground.findById(req.params.id, (err, foundCampground) => {
 		if (err) {
-			console.log('An error occurred');
+			console.log('An error occurred!');
 			console.log(err);
 		} else {
 			res.render('show', { campground: foundCampground });
 		}
 	});
 });
-app.listen(process.env.PORT,() => {
-	console.log(
-		`YelpCamp server has started`
-	);
+
+portfinder.getPort((err, port) => {
+	if (err) {
+		reject(err)
+	} else {
+		app.listen(port, () => {
+			console.log(
+				`YelpCamp server has started at ${port}`
+			);
+		});
+	}
 });
